@@ -15,7 +15,7 @@ class WABot {
         })
         this.client = client
 
-        const botMsg = `🤖 *Halo! Saya adalah Bot WhatsApp* 🤖\n\nTerima kasih telah menghubungi saya. Namun, mohon maaf saat ini saya tidak dapat menjawab pesan/panggilan/grup Anda.\n\nJika Anda memiliki pertanyaan atau membutuhkan bantuan, silakan hubungi _creator_ saya melalui WhatsApp: +${process.env.CONTACT} a.n. *${process.env.NAME}*.\n\nSekali lagi mohon maaf atas keterbatasan ini dan terima kasih atas pengertian Anda. 🙏🏻`
+        const botMsg = `🤖 *Halo! Saya adalah Bot WhatsApp* 🤖\n\nTerima kasih telah menghubungi saya. Namun, mohon maaf saat ini saya tidak dapat menjawab pesan/panggilan/grup Anda.\n\nJika Anda memiliki pertanyaan atau membutuhkan bantuan, silakan hubungi nomor berikut.\n\nSekali lagi mohon maaf atas keterbatasan ini dan terima kasih atas pengertian Anda. 🙏🏻`
 
         this.client.onIncomingCall(async (call) => {
             await this.client.rejectCall(call.id)
