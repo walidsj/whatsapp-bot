@@ -23,7 +23,8 @@ class WABot {
         })
 
         this.client.onMessage(async (message) => {
-            const { from } = message
+            const { from, type } = message
+            if (type !== 'chat') return
             await this.client.sendText(from, botMsg)
         })
     }
