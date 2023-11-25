@@ -22,7 +22,7 @@ class WABot {
             await this.client.sendText(call.peerJid, botMsg)
             await this.client.sendContactVcard(
                 from,
-                `+${process.env.CONTACT}`,
+                `${process.env.CONTACT}@c.us`,
                 process.env.NAME
             )
         })
@@ -40,7 +40,7 @@ class WABot {
                     await this.client.sendText(from, botMsg)
                     await this.client.sendContactVcard(
                         from,
-                        `+${process.env.CONTACT}`,
+                        `${process.env.CONTACT}@c.us`,
                         process.env.NAME
                     )
                     break
