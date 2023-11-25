@@ -20,12 +20,31 @@ class WABot {
         this.client.onIncomingCall(async (call) => {
             await this.client.rejectCall(call.id)
             await this.client.sendText(call.peerJid, botMsg)
+            await this.client.sendContactVcard(
+                from,
+                `+${process.env.CONTACT}`,
+                process.env.NAME
+            )
         })
 
         this.client.onMessage(async (message) => {
             const { from, type } = message
-            if (type !== 'chat') return
-            await this.client.sendText(from, botMsg)
+            switch (type) {
+                case 'chat':
+                case 'image':
+                case 'video':
+                case 'document':
+                case 'audio':
+                case 'ptt':
+                case 'sticker':
+                    await this.client.sendText(from, botMsg)
+                    await this.client.sendContactVcard(
+                        from,
+                        `+${process.env.CONTACT}`,
+                        process.env.NAME
+                    )
+                    break
+            }
         })
     }
 
