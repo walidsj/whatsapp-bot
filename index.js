@@ -1,23 +1,27 @@
 const express = require('express')
 const compression = require('compression')
-require('dotenv').config()
 const { name, version, author } = require('./package.json')
+const dotenv = require('dotenv')
 const waBot = require('./client')
+dotenv.config()
 
+// init whatsapp bot
 waBot.start()
-const app = express()
-
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(compression())
 
 const PORT = process.env.PORT || 5678
 const KEY = process.env.KEY || 'secret'
 
+const app = express()
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(compression())
+
+// hello world (http://HOST:PORT/)
 app.get('/', (req, res) =>
     res.json({ message: `Hello from ${name} v${version} by ${author}!` })
 )
 
+// url untuk mengirim pesan (http://HOST:PORT/send-message)
 app.post('/send-message', async (req, res) => {
     try {
         const { number, message } = req.body
@@ -48,4 +52,5 @@ app.post('/send-message', async (req, res) => {
     }
 })
 
+// jalankan server
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}...`))
