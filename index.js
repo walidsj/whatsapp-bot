@@ -2,6 +2,7 @@ const express = require('express')
 const compression = require('compression')
 const { name, version, author } = require('./package.json')
 const dotenv = require('dotenv')
+const cors = require('cors')
 const waBot = require('./client')
 dotenv.config()
 
@@ -12,6 +13,7 @@ const PORT = process.env.PORT || 5678
 const KEY = process.env.KEY || 'secret'
 
 const app = express()
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(compression())
