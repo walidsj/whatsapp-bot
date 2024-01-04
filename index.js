@@ -30,9 +30,11 @@ app.post('/send-message', async (req, res) => {
         if (!number || !message)
             throw new Error('Missing number or message parameter.')
 
+        if (!req.headers?.authorization) throw new Error('Missing key.')
+
         if (
-            req.headers.authorization &&
-            req.headers.authorization.split(' ')[1] !== KEY
+            req.headers?.authorization.startsWith('Bearer') &&
+            req.headers?.authorization.split(' ')[1] !== KEY
         )
             throw new Error('Invalid key.')
 
